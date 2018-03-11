@@ -1,16 +1,21 @@
 package menjacnica;
 
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 
 import interfejs.IMenjacnica;
 import valuta.Kurs;
 import valuta.Valuta;
 
 public class Menjacnica implements IMenjacnica {
-
+	private LinkedList<Valuta>valute;
 	@Override
 	public void dodajKurs(Valuta v, Kurs k) {
-		// TODO Auto-generated method stub
+		for(Valuta i:valute) {
+			if(i.equals(v)) {
+				i.getKursevi().add(k);
+			}
+		}
 
 	}
 
@@ -21,9 +26,9 @@ public class Menjacnica implements IMenjacnica {
 	}
 
 	@Override
-	public void pronadjiKurs(Valuta v, GregorianCalendar dan) {
+	public Kurs pronadjiKurs(Valuta v, GregorianCalendar dan) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 }
