@@ -1,8 +1,10 @@
 package valuta;
 
+import java.util.LinkedList;
+
 public class Valuta {
 	private String ime, skraceno;
-	private Kurs[] kursevi;
+	private LinkedList<Kurs> kursevi;
 	public String getIme() {
 		return ime;
 	}
@@ -15,10 +17,11 @@ public class Valuta {
 	public void setSkraceno(String skraceno) {
 		this.skraceno = skraceno;
 	}
-	public Kurs[] getKursevi() {
+	
+	public LinkedList<Kurs> getKursevi() {
 		return kursevi;
 	}
-	public void setKursevi(Kurs[] kursevi) {
+	public void setKursevi(LinkedList<Kurs> kursevi) {
 		this.kursevi = kursevi;
 	}
 	@Override
