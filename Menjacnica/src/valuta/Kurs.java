@@ -9,24 +9,28 @@ public class Kurs {
 		return datum;
 	}
 	public void setDatum(GregorianCalendar datum) {
+		if(datum==null)throw new RuntimeException("Los datum");
 		this.datum = datum;
 	}
 	public double getKupovni() {
 		return kupovni;
 	}
 	public void setKupovni(double kupovni) {
+		if(kupovni<=0)throw new RuntimeException("Los kupovni");
 		this.kupovni = kupovni;
 	}
 	public double getSrednji() {
 		return srednji;
 	}
 	public void setSrednji(double srednji) {
+		if(srednji<=0)throw new RuntimeException("Los srednji");
 		this.srednji = srednji;
 	}
 	public double getProdajni() {
 		return prodajni;
 	}
 	public void setProdajni(double prodajni) {
+		if(prodajni<=0)throw new RuntimeException("Los prodajni");
 		this.prodajni = prodajni;
 	}
 	@Override

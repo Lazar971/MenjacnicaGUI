@@ -7,18 +7,21 @@ public class Valuta {
 		return ime;
 	}
 	public void setIme(String ime) {
+		if(ime==null || ime.equals(""))throw new RuntimeException("Lose ime");
 		this.ime = ime;
 	}
 	public String getSkraceno() {
 		return skraceno;
 	}
 	public void setSkraceno(String skraceno) {
+		if(skraceno==null || skraceno.equals(""))throw new RuntimeException("Lose skraceno ime");
 		this.skraceno = skraceno;
 	}
 	public Kurs[] getKursevi() {
 		return kursevi;
 	}
 	public void setKursevi(Kurs[] kursevi) {
+		if(kursevi==null)throw new RuntimeException("Greska u kursevima");
 		this.kursevi = kursevi;
 	}
 	@Override
