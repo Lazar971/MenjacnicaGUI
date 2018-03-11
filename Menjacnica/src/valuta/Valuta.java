@@ -21,6 +21,33 @@ public class Valuta {
 	public void setKursevi(Kurs[] kursevi) {
 		this.kursevi = kursevi;
 	}
+	@Override
+	public String toString() {
+		return "Valuta [ime=" + ime + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((skraceno == null) ? 0 : skraceno.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Valuta other = (Valuta) obj;
+		if (skraceno == null) {
+			if (other.skraceno != null)
+				return false;
+		} else if (!skraceno.equals(other.skraceno))
+			return false;
+		return true;
+	}
 	
 	
 }
