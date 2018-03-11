@@ -1,8 +1,10 @@
 package valuta;
 
+import java.util.LinkedList;
+
 public class Valuta {
 	private String ime, skraceno;
-	private Kurs[] kursevi;
+	private LinkedList<Kurs> kursevi;
 	public String getIme() {
 		return ime;
 	}
@@ -17,11 +19,14 @@ public class Valuta {
 		if(skraceno==null || skraceno.equals(""))throw new RuntimeException("Lose skraceno ime");
 		this.skraceno = skraceno;
 	}
-	public Kurs[] getKursevi() {
+	
+	public LinkedList<Kurs> getKursevi() {
 		return kursevi;
 	}
-	public void setKursevi(Kurs[] kursevi) {
-		if(kursevi==null)throw new RuntimeException("Greska u kursevima");
+
+
+	public void setKursevi(LinkedList<Kurs> kursevi) {
+		if(kursevi==null)throw new RuntimeException("Greska kursevi");
 		this.kursevi = kursevi;
 	}
 	@Override
