@@ -9,32 +9,38 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Toolkit;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.TitledBorder;
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import java.awt.FlowLayout;
 import javax.swing.JTextArea;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MenjacnicaGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
+	private JTextArea statusArea;
 	/**
 	 * Launch the application.
 	 */
@@ -55,9 +61,17 @@ public class MenjacnicaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public MenjacnicaGUI() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				izadji();
+			}
+		});
+
+		setPreferredSize(new Dimension(1000, 600));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenjacnicaGUI.class.getResource("/23174318-mobile-office-work-stock-exchange-market-trading-statistics-accounting-development-and-banking-busin.jpg")));
 		setTitle("Menjacnica");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 519, 354);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -67,16 +81,41 @@ public class MenjacnicaGUI extends JFrame {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmOpen = new JMenuItem("Open");
+		mntmOpen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JFileChooser ch=new JFileChooser();
+				ch.showOpenDialog(null);
+				File f=ch.getSelectedFile();
+				ispisi("Ucitan",f);
+			}
+		});
+		
 		mntmOpen.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
 		mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		mnFile.add(mntmOpen);
 		
 		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser ch=new JFileChooser();
+				ch.showSaveDialog(null);
+				File f=ch.getSelectedFile();
+				ispisi("Sacuvan",f);
+				
+			}
+		});
 		mntmSave.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/FloppyDrive.gif")));
 		mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		mnFile.add(mntmSave);
 		
-		JMenuItem mntmExt = new JMenuItem("Ext");
+		JMenuItem mntmExt = new JMenuItem("Exit");
+		mntmExt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				izadji();
+				
+			}
+		});
 		mntmExt.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.ALT_MASK));
 		mnFile.add(mntmExt);
 		
@@ -84,6 +123,12 @@ public class MenjacnicaGUI extends JFrame {
 		menuBar.add(mnHelp);
 		
 		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, "milosavlevic lazar\nFON");
+			}
+		});
 		mnHelp.add(mntmAbout);
 		contentPane = new JPanel();
 		contentPane.setPreferredSize(new Dimension(15, 12));
@@ -145,11 +190,11 @@ public class MenjacnicaGUI extends JFrame {
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		scrollPane_1.setPreferredSize(new Dimension(25, 50));
+		scrollPane_1.setPreferredSize(new Dimension(25, 70));
 		contentPane.add(scrollPane_1, BorderLayout.SOUTH);
 		
-		JTextArea textArea = new JTextArea();
-		scrollPane_1.setViewportView(textArea);
+		this.statusArea = new JTextArea();
+		scrollPane_1.setViewportView(statusArea);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -168,5 +213,23 @@ public class MenjacnicaGUI extends JFrame {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+	
+	private void ispisi(String s,File f) {
+		
+		if(f==null)return;
+		statusArea.append(s+" fajl "+f.getAbsolutePath()+"\n");
+	}
+	private void izadji() {
+		
+		int opcija = 
+				JOptionPane.showConfirmDialog(
+					null, "Da li zelite da izadjete?",
+					"Izlazak", JOptionPane.YES_NO_CANCEL_OPTION);
+			
+			if (opcija == JOptionPane.YES_OPTION)
+				System.exit(0);
+		
+		
 	}
 }
