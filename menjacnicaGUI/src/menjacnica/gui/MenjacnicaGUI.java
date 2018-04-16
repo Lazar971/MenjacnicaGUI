@@ -41,6 +41,7 @@ public class MenjacnicaGUI extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTextArea statusArea;
+	static String tekst;
 	/**
 	 * Launch the application.
 	 */
@@ -141,6 +142,11 @@ public class MenjacnicaGUI extends JFrame {
 		contentPane.add(panel, BorderLayout.EAST);
 		
 		JButton btnDodajKurs = new JButton("Dodaj kurs");
+		btnDodajKurs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dodaj();
+			}
+		});
 		btnDodajKurs.setPreferredSize(new Dimension(120, 23));
 		panel.add(btnDodajKurs);
 		
@@ -180,6 +186,11 @@ public class MenjacnicaGUI extends JFrame {
 		addPopup(table, popupMenu);
 		
 		JMenuItem mntmDodajKurs = new JMenuItem("Dodaj kurs");
+		mntmDodajKurs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dodaj();
+			}
+		});
 		popupMenu.add(mntmDodajKurs);
 		
 		JMenuItem mntmObrisiKurs = new JMenuItem("Obrisi kurs");
@@ -215,7 +226,7 @@ public class MenjacnicaGUI extends JFrame {
 		});
 	}
 	
-	private void ispisi(String s,File f) {
+	 void ispisi(String s,File f) {
 		
 		if(f==null)return;
 		statusArea.append(s+" fajl "+f.getAbsolutePath()+"\n");
@@ -232,4 +243,14 @@ public class MenjacnicaGUI extends JFrame {
 		
 		
 	}
+	private void dodaj() {
+		
+		DodajKursGUI dk=new DodajKursGUI(this);
+		dk.setVisible(true);
+	}
+
+	public JTextArea getStatusArea() {
+		return statusArea;
+	}
+	
 }
